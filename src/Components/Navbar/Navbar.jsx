@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import { useState } from 'react'
 import { Drawer,Box, Stack } from '@mui/material'
+import {SlClose} from 'react-icons/sl'
 
 function Navbar(props) {
 
@@ -35,6 +36,7 @@ function Navbar(props) {
         <Drawer open={open} anchor='right' onClose={handleClose}>
             <div className="menu" style={{width:"300px", height:"100vh", backgroundColor:"#398378", display:"flex", justifyContent:"center"}}>
               <Box sx={{width:"200px", height:"500px", mt:"80px"}}>
+                <SlClose onClick={handleClose} style={{cursor:"pointer",color:"white", fontSize:"40px", transform:"translate(170px, -40px)"}}/>
                 <Stack spacing={5} sx={{color:"white"}}>
                   {items?.map((item) => (
                     <Link key={item.name} to={item.link} style={{textDecoration:'none', color:"white"}}><h3>{item.name}</h3></Link>
