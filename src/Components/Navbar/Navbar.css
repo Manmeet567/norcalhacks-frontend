@@ -1,0 +1,28 @@
+.inner-content{
+    width:1200px;
+    display: flex;
+    height: 100%;
+    align-items: end;
+    justify-content: space-between;
+}
+
+.menu-items{
+    margin-left: 50px;
+    display: flex;
+}
+
+.item{
+    padding-bottom: 8px;
+
+    transition: .1s linear;
+}
+.item:hover{
+    transform: translateY(-5px);
+}
+
+@media screen and (max-width:1040px) {
+    .inner-content{
+        width: 100%;
+        padding: 0 20px;
+    }
+}
