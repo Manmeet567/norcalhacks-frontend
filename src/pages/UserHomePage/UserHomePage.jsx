@@ -1,4 +1,5 @@
 import Navbar from "../../Components/Navbar/Navbar"
+import UserFeed from "../../Components/UserFeed/UserFeed"
 
 function UserHomePage() {
 
@@ -12,10 +13,6 @@ function UserHomePage() {
             link:"/newPost"
         },
         {
-            name:"People",
-            link:'/connect'
-        },
-        {
             name:"Explore",
             link:"/explore"
         }
@@ -24,6 +21,7 @@ function UserHomePage() {
   return (
     <div className="userHomePage">
         <Navbar items={Items}/>
+        <UserFeed />
     </div>
   )
 }
