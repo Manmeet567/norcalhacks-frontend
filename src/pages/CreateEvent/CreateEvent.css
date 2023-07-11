@@ -1,0 +1,13 @@
+.ce-inner-content{
+    width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    padding:70px 40px;
+}
+
+@media screen and (max-width:1240px) {
+    .ce-inner-content{
+        width: 100%;
+        padding: 70px 40px 20px;
+    }
+}
