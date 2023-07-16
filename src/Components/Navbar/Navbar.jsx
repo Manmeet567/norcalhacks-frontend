@@ -36,10 +36,12 @@ function Navbar(props) {
   return (
     <div className="navbar" style={{position:"fixed", zIndex:"999", width:"100%", height:"70px", backgroundColor:"#398378", display:"flex", justifyContent:"center", boxShadow:"inset rgba(0, 0, 0, 0.2) 0px -20px 20px 0px, rgba(0, 0, 0, 0.2) 0px 20px 20px 0px"}}>
         <div className="inner-content" >
+            <Link to='/home' style={{textDecoration:"none"}}>
             <div className="logo" style={{display:"flex", alignItems:"end"}}>
               <img src={logo} alt="logo" width="60px" />
               <h1 style={{color:"white", marginBottom:"5px"}}>Taurite</h1>
             </div>
+            </Link>
 
             <Stack direction="row" spacing={3} sx={{alignItems:"center"}}>
             <div className="menu-items">
