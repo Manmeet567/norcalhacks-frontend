@@ -1,9 +1,10 @@
 import { Container, Stack, TextField,Button, FormGroup, FormControlLabel, Checkbox } from '@mui/material'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/taurite-logo.png'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { useLogin } from '../../hooks/useLogin'
 
 
 function Login() {
@@ -11,6 +12,23 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(true);
+
+    const {login, error, loading} = useLogin()
+
+    useEffect(() => {
+        if(error){
+            toast.error(error, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            })
+        }
+    }, [error])
 
     const inputValidate = (username, password) => {
         if(!username || !password){
@@ -29,10 +47,12 @@ function Login() {
         return true;
     }
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault()
         const validated = inputValidate(username, password);
-        console.log(username, password, rememberMe)
+        if(validated){
+            await login(username,password,rememberMe)
+        }
     }
 
   return (
