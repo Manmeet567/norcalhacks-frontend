@@ -6,8 +6,13 @@ import { useState } from 'react'
 import { Drawer,Box, Stack, Menu, MenuItem } from '@mui/material'
 import {SlClose} from 'react-icons/sl'
 import {FaUserCircle} from 'react-icons/fa'
+import { useLogout } from '../../hooks/useLogout'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 function Navbar(props) {
+
+  const {logout} = useLogout()
+  const { user } = useAuthContext();
 
   const items = props.items
 
@@ -16,9 +21,13 @@ function Navbar(props) {
   const handleClickMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const handleLogout = () => {
+    logout()
+  };
+
   const handleCloseMenu = () => {
     setAnchorEl(null);
-  };
+  }
 
   const [open,setOpen] = useState(false)
   const handleOpen = () => setOpen(true);
@@ -52,9 +61,9 @@ function Navbar(props) {
                     'aria-labelledby': 'user',
                   }}
                 >
-                  <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
-                  <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
-                  <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
+                  <MenuItem>{user.user.username}</MenuItem>
+                  <MenuItem>My account</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
             </div>
             </Stack>
