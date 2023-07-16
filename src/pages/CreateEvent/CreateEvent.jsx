@@ -15,7 +15,8 @@ function CreateEvent() {
         title:'',
         desc:'',
         location:'',
-        time:dayjs('2023-05-10T03:30')
+        startTime:dayjs('2023-05-10T03:30'),
+        endTime:dayjs('2023-5-12T12:00')
     })
 
     const handleInputChange = (event) => {
@@ -27,8 +28,8 @@ function CreateEvent() {
       };
 
       const inputValidation = (eventData) =>{
-        if(!eventData.title || !eventData.desc || !eventData.location || !eventData.time){
-            toast.error('Please provide correct Input', {
+        if(!eventData.title || !eventData.desc || !eventData.location || !eventData.startTime || !eventData.endTime){
+            toast.error('Please fill in all fields', {
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -120,8 +121,30 @@ function CreateEvent() {
                 },}}/>  
 
                 <DateTimePicker
-                    label="Event's Time"
-                    value={eventData.time}
+                required
+                    label="Event's Start Time"
+                    value={eventData.startTime}
+                    onChange={() => handleInputChange}
+                    sx={{mb:"20px", '& label.Mui-focused': {
+                        color: '#398378',
+                    },
+                    '& .MuiInput-underline:after': {
+                        borderBottomColor: 'green',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                        borderColor: '#398378',
+                        },
+                        '&.Mui-focused fieldset': {
+                        borderColor: '#398378',
+                        },
+                    },}}
+                />
+
+                <DateTimePicker
+                required
+                    label="Event's End Time"
+                    value={eventData.endTime}
                     onChange={() => handleInputChange}
                     sx={{'& label.Mui-focused': {
                         color: '#398378',
