@@ -1,0 +1,38 @@
+.inner-content-ef{
+    width: 1200px;
+}
+
+.heading-ef{
+    font-size: 30px;
+}
+.location-form{
+    flex-direction: row;
+}
+.event-feed{
+    margin-top: 40px;
+}
+
+@media screen and (max-width:1240px) {
+    .inner-content-ef{
+        width: 100%;
+        padding: 0 20px;
+    }
+    .location-form{
+        flex-direction: row;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .location-form{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+     }
+     .heading-ef{
+         font-size: 20px;
+     }
+     .select-ef{
+         margin-top: 10px;
+         margin-right: 40px;
+     }
+}
