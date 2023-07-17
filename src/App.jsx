@@ -7,6 +7,7 @@ import UserHomePage from './pages/UserHomePage/UserHomePage'
 import CreateEvent from './pages/CreateEvent/CreateEvent'
 import { useAuthContext } from './hooks/useAuthContext'
 import SharePost from './pages/SharePost/SharePost'
+import Explore from './pages/Explore/Explore'
 
 function App() {
 
@@ -28,6 +29,8 @@ function App() {
           <Route path='/createEvent' element={<CreateEvent />} />
           
           <Route path='/newPost' element={user ? <SharePost /> : <Navigate to='/home' /> } />
+
+          <Route path='/explore' element={ user ? <Explore /> : <Navigate to='/home' />} />
 
         </Routes>
       </div>  
