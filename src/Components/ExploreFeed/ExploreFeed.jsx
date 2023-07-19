@@ -15,8 +15,9 @@ function ExploreFeed({ countries }) {
     <div className="exploreFeed" style={{ width: "100%", minHeight: "100vh", maxHeight: "100%", paddingTop: "70px", display: "flex", backgroundColor: "#66f1dc5d", justifyContent: "center" }}>
       <div className="inner-content-ef" >
 
-        <FormControl variant="standard" className="location-form" sx={{ my: 3, minWidth: 120, display:"flex" }}>
-            <h1 className="heading-ef" style={{color:"#398378"}}>Search Events by Location:</h1>
+        <div className="location-form">
+          <h1 className="heading-ef" style={{color:"#398378"}}>Search Events by Location:</h1>
+          <FormControl variant="standard" sx={{ minWidth: 120 }}>
             <div className="select-area" style={{ marginLeft:"40px"}}>
             <Select value={selectedCountry} className="select-ef"  sx={{ width: "200px"}}  onChange={(e) => setSelectedCountry(e.target.value)} inputProps={{ 'aria-label': 'Without label' }}>
                 <MenuItem value="None">
@@ -30,6 +31,7 @@ function ExploreFeed({ countries }) {
             </Select>
             </div>
         </FormControl>
+        </div>
 
         <div className="event-feed" >
           <h2 className="heading-ef" style={{color:"#398378"}}>Ongoing Events:</h2>
