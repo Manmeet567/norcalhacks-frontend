@@ -63,7 +63,7 @@ function Navbar(props) {
                     'aria-labelledby': 'user',
                   }}
                 >
-                  <MenuItem>{user.user.username}</MenuItem>
+                  <MenuItem>{user?.user.username}</MenuItem>
                   <MenuItem>My account</MenuItem>
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
