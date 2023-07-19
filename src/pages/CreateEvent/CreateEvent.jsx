@@ -8,6 +8,8 @@ import Navbar from "../../Components/Navbar/Navbar"
 import './CreateEvent.css'
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { useCreateEvent } from '../../hooks/useCreateEvent';
+import { GiClawHammer } from 'react-icons/gi';
 
 function CreateEvent() {
 
@@ -18,6 +20,8 @@ function CreateEvent() {
         startTime:dayjs('2023-05-10T03:30'),
         endTime:dayjs('2023-5-12T12:00')
     })
+
+    const {createEvent, status, error} = useCreateEvent();
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -47,7 +51,9 @@ function CreateEvent() {
       const handleSignup = (e) => {
         e.preventDefault()
         const validated = inputValidation(eventData)
-        console.log(eventData)
+        if(validated){
+            createEvent(eventData)
+        }
     }
 
     const Items = [
