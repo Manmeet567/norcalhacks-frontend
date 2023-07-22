@@ -1,6 +1,6 @@
 import './Navbar.css'
 import logo from '../../assets/logo.png'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import { useState } from 'react'
 import { Drawer,Box, Stack, Menu, MenuItem } from '@mui/material'
@@ -64,7 +64,7 @@ function Navbar(props) {
                   }}
                 >
                   <MenuItem>{user?.user.username}</MenuItem>
-                  <MenuItem>My account</MenuItem>
+                  <MenuItem><Link to='/home' style={{textDecoration:'none', color:"black"}}>Home</Link></MenuItem>
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
             </div>
