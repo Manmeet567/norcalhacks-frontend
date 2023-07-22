@@ -30,7 +30,7 @@ function App() {
           
           <Route path='/newPost' element={user ? <SharePost /> : <Navigate to='/home' /> } />
 
-          <Route path='/explore' element={ user ? <Explore /> : <Navigate to='/home' />} />
+          <Route path='/events' element={ user ? <Explore /> : <Navigate to='/home' />} />
 
         </Routes>
       </div>  
