@@ -59,8 +59,8 @@ function SharePost() {
             link:"/newPost"
         },
         {
-            name:"Explore",
-            link:"/explore"
+            name:"Events",
+            link:"/events"
         }
     ]
 
