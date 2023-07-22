@@ -9,16 +9,20 @@ import './CreateEvent.css'
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { useCreateEvent } from '../../hooks/useCreateEvent';
-import { GiClawHammer } from 'react-icons/gi';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 function CreateEvent() {
+
+    
+    const { user } = useAuthContext();
 
     const [eventData, setEventData] = useState({
         title:'',
         desc:'',
         location:'',
         startTime:dayjs('2023-05-10T03:30'),
-        endTime:dayjs('2023-5-12T12:00')
+        endTime:dayjs('2023-5-12T12:00'),
+        author:user?.user.username
     })
 
     const {createEvent, status, error} = useCreateEvent();
@@ -66,8 +70,8 @@ function CreateEvent() {
             link:"/newPost"
         },
         {
-            name:"Explore",
-            link:"/explore"
+            name:"Events",
+            link:"/events"
         }
     ]
 
