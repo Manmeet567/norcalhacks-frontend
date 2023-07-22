@@ -13,8 +13,8 @@ function UserHomePage() {
             link:"/newPost"
         },
         {
-            name:"Explore",
-            link:"/explore"
+            name:"Events",
+            link:"/events"
         }
     ]
 
