@@ -1,41 +1,74 @@
 import './ExploreFeed.css'
+import dayjs from 'dayjs';
+import {FaTrash} from 'react-icons/fa6'
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { ToastContainer,toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 function EventCard( { event } ) {
 
-  const startDateTimeString = event?.startTime;
-  const endDateTimeString = event?.endTime;
-  const startDateTime = new Date(startDateTimeString)
-  const endDateTime = new Date(endDateTimeString)
+  const { user } = useAuthContext();
 
-  const startDate =  startDateTime.toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-  });
-  const startTime = startDateTime.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
-  const endTime = endDateTime.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  })
+  const startDateTimeString = event?.startTime;
+  let endDateTimeString = event?.endTime;
+  let startDate = dayjs(startDateTimeString).format('DD/MM/YY');
+  let startTime = dayjs(startDateTimeString).format('hh:mm A');
+  let endTime = dayjs(endDateTimeString).format('hh:mm A')
+
+  function refreshPage() {
+    window.location.reload(true);
+  }
+
+  const handleDelete = async (_id) => {
+    const response = await fetch(`http://localhost:4000/api/deleteEvent/${_id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${user.token}`
+      },
+    });
+
+    const json = await response.json()
+    if(!response.ok){
+      toast.error(`${json.error}`)
+    }
+
+    if(response.ok){
+      toast.success(`${json.message}`)
+      refreshPage()
+    }
+  }
 
   return (
     <div className="event-card">
                     <h2>{event?.title}</h2>
                     <div className="date-time">
                       <p><b>Date - </b>{startDate}</p>
-                      <p><b>{event?.startTime} - {endTime}</b></p>
+                      <p><b>{startTime} - {endTime}</b></p>
                     </div>
                     <p style={{marginBottom:"8px"}}><b>Location - {event?.location}</b></p>
                     <p style={{marginBottom:"8px"}}><b>Created By - </b>{event?.author}</p>
                     <h4>Description - </h4>
                     <p style={{textAlign:"justify"}}>{event?.desc}</p>
 
-                    <button style={{margin:"14px auto 0", width:"100px", borderRadius:"5px", border:"none", padding:"10px 0", backgroundColor:"#398378", color:"white", cursor:"pointer"}}>Learn More</button>
+                    <div className="btns" style={{display:"flex", justifyContent:"space-between", marginTop:"20px"}}>
+                    {/* <button style={{ borderRadius:"5px", border:"none", padding:"10px", backgroundColor:"#398378", color:"white", cursor:"pointer"}}>Learn More</button> */}
+
+                    {user.user.username === event?.author && <button onClick={() => handleDelete(event?._id)} style={{ borderRadius:"5px", border:"none", padding:"10px", backgroundColor:"#398378", color:"white", cursor:"pointer"}}><FaTrash /></button>}
+                    </div>
+
+                    <ToastContainer
+            position="bottom-right"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+        />
                 </div>
   )
 }
