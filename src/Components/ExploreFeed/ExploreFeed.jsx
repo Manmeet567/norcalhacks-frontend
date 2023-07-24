@@ -15,7 +15,7 @@ function ExploreFeed({ countries }) {
   const { user } = useAuthContext()
 
   const fetchData = async (country) => {
-      const response = await fetch(`http://localhost:4000/api/location?country=${country}`, {
+      const response = await fetch(`https://taurite-backend.onrender.com/api/location?country=${country}`, {
         headers:{
           'authorization': `Bearer ${user.token}`
         }

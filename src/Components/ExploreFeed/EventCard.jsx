@@ -20,7 +20,7 @@ function EventCard( { event } ) {
   }
 
   const handleDelete = async (_id) => {
-    const response = await fetch(`http://localhost:4000/api/deleteEvent/${_id}`, {
+    const response = await fetch(`https://taurite-backend.onrender.com/api/deleteEvent/${_id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

@@ -10,7 +10,7 @@ export const useCreateEvent = () => {
     const createEvent = async (obj) => {
         setStatus(false);
         
-        const response = await fetch('http://localhost:4000/api/createEvent', {
+        const response = await fetch('https://taurite-backend.onrender.com/api/createEvent', {
             method:"POST",
             headers:{
                 'Content-Type':'application/json',
