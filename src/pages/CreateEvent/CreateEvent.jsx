@@ -15,13 +15,14 @@ function CreateEvent() {
 
     
     const { user } = useAuthContext();
+    const [time,setTime] = useState('')
 
     const [eventData, setEventData] = useState({
         title:'',
         desc:'',
         location:'',
-        startTime:dayjs('2023-05-10T03:30'),
-        endTime:dayjs('2023-5-12T12:00'),
+        startTime:dayjs('YYYY-MM-DDTHH:mm:ss'),
+        endTime:dayjs('YYYY-MM-DDTHH:mm:ss'),
         author:user?.user.username
     })
 
@@ -43,6 +44,29 @@ function CreateEvent() {
           [name]: value,
         }));
       };
+
+      const handleStartTimeChange = (newValue) => {
+        // Update the time state variable
+        setTime(newValue);
+    
+        // Update the startTime property in eventData object
+        setEventData((prevEventData) => ({
+          ...prevEventData,
+          startTime: dayjs(newValue)
+        }));
+        setTime('')
+      };
+
+      const handleEndTimeChange = (newValue) => {
+        setTime(newValue)
+
+        setEventData((prevEventData) => ({
+            ...prevEventData,
+            endTime: dayjs(newValue)
+          }));
+          setTime('')
+      }
+
 
       const inputValidation = (eventData) =>{
         if(!eventData.title || !eventData.desc || !eventData.location || !eventData.startTime || !eventData.endTime){
@@ -139,7 +163,7 @@ function CreateEvent() {
                 required
                     label="Event's Start Time"
                     value={eventData.startTime}
-                    onChange={() => handleInputChange}
+                    onChange={handleStartTimeChange}
                     sx={{mb:"20px", '& label.Mui-focused': {
                         color: '#398378',
                     },
@@ -160,7 +184,7 @@ function CreateEvent() {
                 required
                     label="Event's End Time"
                     value={eventData.endTime}
-                    onChange={() => handleInputChange}
+                    onChange={handleEndTimeChange}
                     sx={{'& label.Mui-focused': {
                         color: '#398378',
                     },
