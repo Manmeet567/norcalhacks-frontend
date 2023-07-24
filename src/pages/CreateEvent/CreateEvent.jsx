@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Navbar from "../../Components/Navbar/Navbar"
 import './CreateEvent.css'
 import {ToastContainer, toast} from 'react-toastify'
@@ -26,6 +26,15 @@ function CreateEvent() {
     })
 
     const {createEvent, status, error} = useCreateEvent();
+
+    useEffect(() => {
+        if(status){
+            toast.success("Event Created Successfully")
+        }
+        if(error){
+            toast.error(`Error:${error}`)
+        }
+    }, [status,error])
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -64,10 +73,6 @@ function CreateEvent() {
         {
             name:"Create Event",
             link:"/createEvent"
-        },
-        {
-            name:"Share Post",
-            link:"/newPost"
         },
         {
             name:"Events",
@@ -173,7 +178,7 @@ function CreateEvent() {
                 />
                 
 
-                <Button onClick={handleSignup} size="small" sx={{padding:"4px 15px 2px", color:"white", fontWeight:"bold",textTransform:"none" ,fontSize:'20px', mt:'20px', backgroundColor:'#398378', ":hover":{ bgcolor:"#26564f"}}}>Submit</Button>
+                <Button disabled={false} onClick={handleSignup} size="small" sx={{padding:"4px 15px 2px", color:"white", fontWeight:"bold",textTransform:"none" ,fontSize:'20px', mt:'20px', backgroundColor:'#398378', ":hover":{ bgcolor:"#26564f"}}}>Submit</Button>
             </FormGroup>
             </div>
 
