@@ -12,10 +12,6 @@ function Explore() {
             link:"/createEvent"
         },
         {
-            name:"Share Post",
-            link:"/newPost"
-        },
-        {
             name:"Events",
             link:"/events"
         }
