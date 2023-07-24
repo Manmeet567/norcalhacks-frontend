@@ -3,7 +3,6 @@ import './App.css'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import Signup from './pages/Signup/Signup'
-import UserHomePage from './pages/UserHomePage/UserHomePage'
 import CreateEvent from './pages/CreateEvent/CreateEvent'
 import { useAuthContext } from './hooks/useAuthContext'
 import Explore from './pages/Explore/Explore'
@@ -17,17 +16,17 @@ function App() {
       <div className="pages">
         <Routes>
 
-          <Route path='/' element={user ? <Navigate to='/home' /> : <Home />} />
+          <Route path='/' element={user ? <Navigate to='/events' /> : <Home />} />
 
-          <Route path='/login' element={!user ? <Login/> : <Navigate to='/home' />} />
+          <Route path='/login' element={!user ? <Login/> : <Navigate to='/events' />} />
 
-          <Route path='/signup' element={!user ? <Signup/> : <Navigate to='/home' />} />
+          <Route path='/signup' element={!user ? <Signup/> : <Navigate to='/events' />} />
 
-          <Route path='/home' element={!user ? <Navigate to='/' /> : <UserHomePage />} />
+          <Route path='/home' element={user ? <Navigate to='/events' /> : <Home />} />
 
-          <Route path='/createEvent' element={<CreateEvent />} />
+          <Route path='/createEvent' element={user ? <CreateEvent /> : <Navigate to ='/' />} />
 
-          <Route path='/events' element={ user ? <Explore /> : <Navigate to='/home' />} />
+          <Route path='/events' element={ user ? <Explore /> : <Navigate to='/' />} />
 
         </Routes>
       </div>  
