@@ -7,11 +7,38 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuthContext } from "../../hooks/useAuthContext"
 
 function ExploreFeed({ countries }) {
+  
   const [selectedCountry, setSelectedCountry] = useState("")
   const [countryNames, setCountryNames] = useState([])
   const [events, setEvents] = useState([])
 
   const { user } = useAuthContext()
+
+  const fetchData = async (country) => {
+      const response = await fetch(`http://localhost:4000/api/location?country=${country}`, {
+        headers:{
+          'authorization': `Bearer ${user.token}`
+        }
+      });
+      const json = await response.json()
+      console.log(json)
+      if(!response.ok) {
+        toast.error(`Error: ${json.error}`)
+      }
+
+      if(response.ok){
+        setEvents(json)
+      }
+  };
+
+  useEffect(() => {
+    if (selectedCountry && selectedCountry !== 'None') {
+      fetchData(selectedCountry);
+    }
+
+  }, [selectedCountry])
+
+
 
   useEffect(() => {
     const names = countries.map((country) => country.name.common)
@@ -31,7 +58,6 @@ function ExploreFeed({ countries }) {
       }
       if(response.ok){
         setEvents(json)
-        console.log(json)
       }
     }
 
@@ -64,7 +90,7 @@ function ExploreFeed({ countries }) {
           <h2 className="heading-ef" style={{color:"#398378"}}>Ongoing Events:</h2>
             <div className="events-section">
 
-                  {events.map((event) => (
+                  {events?.map((event) => (
                     <EventCard key={event._id} event = {event}/>
                   ))}
 
