@@ -47,7 +47,7 @@ function ExploreFeed({ countries }) {
 
   useEffect(() => {
     const getEvents = async () => {
-      const response = await fetch('http://localhost:4000/api/getEvents',{
+      const response = await fetch('https://taurite-backend.onrender.com/api/getEvents',{
         headers:{
           'authorization': `Bearer ${user.token}`
         }
